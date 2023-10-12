@@ -60,7 +60,7 @@ class App extends Component {
     this.setState({
       imageUrl: this.state.input,
     });
-    fetch("http://localhost:3000/imageurl", {
+    fetch("https://facedetectionbrainbackend.onrender.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -72,7 +72,7 @@ class App extends Component {
       })
       .then((data) => {
         if (data) {
-          fetch("http://localhost:3000/image", {
+          fetch("https://facedetectionbrainbackend.onrender.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
