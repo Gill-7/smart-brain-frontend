@@ -29,7 +29,7 @@ class Register extends React.Component {
   };
 
   onRegisterButton = () => {
-    fetch("https://facedetectionbrainbackend.onrender.com/register", {
+    fetch("https://face-detection-backend-eef6.onrender.com/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
