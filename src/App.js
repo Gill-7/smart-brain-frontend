@@ -4,7 +4,7 @@ import Navigation from "./components/Navigation/Navigation";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import "./App.css";
-import SignIn from "./components/SignIn/SignIn";
+import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 import Rank from "./components/Rank/Rank";
 
@@ -147,7 +147,7 @@ class App extends Component {
               )}
             </div>
           ) : route === "signin" ? (
-            <SignIn
+            <Signin
               isSignedIn={isSignedIn}
               onLoadUser={this.onLoadUser}
               onRouteChange={this.onRouteChange}

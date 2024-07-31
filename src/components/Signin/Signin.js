@@ -1,6 +1,6 @@
 import React from "react";
 
-class SignIn extends React.Component {
+class Signin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,6 +33,7 @@ class SignIn extends React.Component {
       .then((response) => response.json())
       .then((user) => {
         if (user.id) {
+          // loading user
           this.props.onLoadUser(user);
           this.props.onRouteChange("home");
         }
@@ -109,4 +110,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default Signin;
