@@ -30,7 +30,7 @@ class Register extends React.Component {
 
   onRegisterButton = () => {
     fetch("https://face-detection-backend-eef6.onrender.com/register", {
-      method: "post",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: this.state.name,

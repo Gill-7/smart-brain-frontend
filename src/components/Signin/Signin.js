@@ -1,6 +1,6 @@
 import React from "react";
 
-class Signin extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +23,7 @@ class Signin extends React.Component {
 
   onSubmit = () => {
     fetch("https://face-detection-backend-eef6.onrender.com/signin", {
-      method: "post",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: this.state.signInEmail,
@@ -109,4 +109,4 @@ class Signin extends React.Component {
   }
 }
 
-export default Signin;
+export default SignIn;
