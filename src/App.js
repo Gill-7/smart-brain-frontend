@@ -89,8 +89,8 @@ class App extends Component {
     });
 
     if (this.state.user.id) {
-      // fetch("https://face-detection-backend-eef6.onrender.com/imageurl", {
-      fetch("http://localhost:3000/imageurl", {
+      fetch("https://face-detection-backend-eef6.onrender.com/imageurl", {
+        // fetch("http://localhost:3000/imageurl", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -103,8 +103,8 @@ class App extends Component {
         })
         .then((data) => {
           if (data) {
-            // fetch("https://face-detection-backend-eef6.onrender.com/image", {
-            fetch("http://localhost:3000/image", {
+            fetch("https://face-detection-backend-eef6.onrender.com/image", {
+              // fetch("http://localhost:3000/image", {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({

@@ -27,8 +27,8 @@ class Signin extends React.Component {
 
     const form = e.target.closest("form");
     if (form.checkValidity()) {
-      // fetch("https://face-detection-backend-eef6.onrender.com/signin", {
-      fetch("http://localhost:3000/signin", {
+      fetch("https://face-detection-backend-eef6.onrender.com/signin", {
+        // fetch("http://localhost:3000/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

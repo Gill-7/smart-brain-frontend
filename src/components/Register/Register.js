@@ -43,8 +43,8 @@ class Register extends React.Component {
 
     const form = e.target.closest("form");
     if (form.checkValidity()) {
-      // fetch("https://face-detection-backend-eef6.onrender.com/register", {
-      fetch("http://localhost:3000/register", {
+      fetch("https://face-detection-backend-eef6.onrender.com/register", {
+        // fetch("http://localhost:3000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
