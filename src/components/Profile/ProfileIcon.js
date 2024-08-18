@@ -2,14 +2,8 @@ import React from "react";
 import { CgProfile } from "react-icons/cg";
 
 export default class ProfileIcon extends React.Component {
-  // toggleDropdown = () => {
-  //   this.setState((prevState) => ({
-  //     isDropdownOpen: !prevState.isDropdownOpen,
-  //   }));
-  // };
-
   handleSignOut = () => {
-    fetch("http://localhost:3000/signout", {
+    fetch("https://face-detection-backend-eef6.onrender.com/signout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
