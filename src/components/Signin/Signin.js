@@ -46,7 +46,7 @@ class Signin extends React.Component {
             this.saveAuthTokenInSession(data.token);
 
             fetch(
-              `https://face-detection-backend-eef6.onrender.com/${data.userId}`,
+              `https://face-detection-backend-eef6.onrender.com/profile/${data.userId}`,
               {
                 method: "GET",
                 headers: {
