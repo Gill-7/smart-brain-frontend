@@ -1,11 +1,11 @@
 import React, { Component, createRef } from "react";
-import ParticlesBg from "particles-bg";
+// import ParticlesBg from "particles-bg";
 import Navigation from "./components/Navigation/Navigation";
-
 import "./App.css";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
-
+import Modal from "./components/Modal/Modal";
+import Profile from "./components/Profile/Profile";
 import Container from "./components/Container/Container";
 
 const initialState = {
@@ -16,14 +16,17 @@ const initialState = {
   imageSrc: "",
   baseImage: "",
   boxes: [],
-  route: "signin", // "signin"
-  isSignedIn: false, // "false"
+  route: "signin",
+  isSignedIn: false,
+  isProfileOpen: false,
+  isDropdownOpen: false,
   user: {
     id: "",
     name: "",
     email: "",
     entries: 0,
     joined: "",
+    date_of_birth: "",
   },
 };
 
@@ -32,6 +35,47 @@ class App extends Component {
     super();
     this.state = initialState;
     this.chooseFileRef = createRef();
+  }
+
+  componentDidMount() {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch(`https://face-detection-backend-eef6.onrender.com/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.id) {
+            fetch(
+              `https://face-detection-backend-eef6.onrender.com/profile/${data.id}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: token,
+                },
+              }
+            )
+              .then((res) => res.json())
+              .then((user) => {
+                if (user && user.email) {
+                  this.onLoadUser(user);
+                  this.onRouteChange("home");
+                }
+              })
+              .catch((error) => {
+                this.setState({
+                  errorMsg: "Unable to sign in. Please try again later.",
+                });
+              });
+          }
+        })
+        .catch(console.log);
+    }
   }
 
   calculateFaceLocation = (data) => {
@@ -90,9 +134,11 @@ class App extends Component {
 
     if (this.state.user.id) {
       fetch("https://face-detection-backend-eef6.onrender.com/imageurl", {
-        // fetch("http://localhost:3000/imageurl", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: window.sessionStorage.getItem("token"),
+        },
         body: JSON.stringify({
           imageUrl: this.state.inputUrl,
           baseImage: this.state.baseImage,
@@ -104,9 +150,11 @@ class App extends Component {
         .then((data) => {
           if (data) {
             fetch("https://face-detection-backend-eef6.onrender.com/image", {
-              // fetch("http://localhost:3000/image", {
               method: "PUT",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: window.sessionStorage.getItem("token"),
+              },
               body: JSON.stringify({
                 id: this.state.user.id,
               }),
@@ -186,8 +234,23 @@ class App extends Component {
         name: data.name,
         joined: data.joined,
         entries: data.entries,
+        date_of_birth: data.date_of_birth,
       },
     });
+  };
+
+  toggleProfileModal = () => {
+    this.setState((state) => ({
+      ...state,
+      isProfileOpen: !state.isProfileOpen,
+      isDropdownOpen: false,
+    }));
+  };
+
+  toggleProfileDropdown = () => {
+    this.setState((prevState) => ({
+      isDropdownOpen: !prevState.isDropdownOpen,
+    }));
   };
 
   render() {
@@ -200,6 +263,9 @@ class App extends Component {
       route,
       boxes,
       error,
+      isProfileOpen,
+      isDropdownOpen,
+      user,
     } = this.state;
     return (
       <div
@@ -219,7 +285,20 @@ class App extends Component {
           <Navigation
             isSignedIn={isSignedIn}
             onRouteChange={this.onRouteChange}
+            toggleProfileModal={this.toggleProfileModal}
+            toggleProfileDropdown={this.toggleProfileDropdown}
+            isDropdownOpen={isDropdownOpen}
           />
+          {isProfileOpen && (
+            <Modal>
+              <Profile
+                isProfileOpen={isProfileOpen}
+                toggleProfileModal={this.toggleProfileModal}
+                user={user}
+                onLoadUser={this.onLoadUser}
+              />
+            </Modal>
+          )}
         </div>
         <div
           className={`${
@@ -250,6 +329,7 @@ class App extends Component {
           ) : route === "signin" ? (
             <Signin
               isSignedIn={isSignedIn}
+              user={user}
               onLoadUser={this.onLoadUser}
               onRouteChange={this.onRouteChange}
             />

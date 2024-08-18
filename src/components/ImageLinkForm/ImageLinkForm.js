@@ -7,11 +7,6 @@ const ImageLinkForm = ({
   chooseFileRef,
   onSubmit,
 }) => {
-  // const [error, setError] = useState(false);
-
-  // handleError = () => {
-
-  // }
   return (
     <div className="flex flex-col justify-center items-center">
       <p className="mb-4">Choose a picture or paste in url</p>

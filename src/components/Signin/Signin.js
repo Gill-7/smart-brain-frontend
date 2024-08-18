@@ -22,13 +22,17 @@ class Signin extends React.Component {
     });
   };
 
+  saveAuthTokenInSession = (token) => {
+    window.sessionStorage.setItem("token", token);
+  };
+
   handleSignIn = (e) => {
     e.preventDefault();
 
     const form = e.target.closest("form");
     if (form.checkValidity()) {
+      // fetch("http://localhost:3000/signin", {
       fetch("https://face-detection-backend-eef6.onrender.com/signin", {
-        // fetch("http://localhost:3000/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -37,12 +41,33 @@ class Signin extends React.Component {
         }),
       })
         .then((response) => response.json())
-        .then((user) => {
-          if (user.id) {
-            this.setState({ error: "" });
-            // loading user
-            this.props.onLoadUser(user);
-            this.props.onRouteChange("home");
+        .then((data) => {
+          if (data.userId && data.success === "true") {
+            this.saveAuthTokenInSession(data.token);
+
+            fetch(
+              `https://face-detection-backend-eef6.onrender.com/${data.userId}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: data.token,
+                },
+              }
+            )
+              .then((res) => res.json())
+              .then((user) => {
+                if (user && user.email) {
+                  this.setState({ error: "" });
+                  this.props.onLoadUser(user);
+                  this.props.onRouteChange("home");
+                }
+              })
+              .catch((error) => {
+                this.setState({
+                  errorMsg: "Unable to sign in. Please try again later.",
+                });
+              });
           } else {
             this.setState({ errorMsg: "Wrong credentials, Please try again!" });
           }

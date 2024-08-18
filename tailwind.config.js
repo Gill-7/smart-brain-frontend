@@ -1,10 +1,12 @@
-/** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     screens: {
       sm: "335px",
-      "semi-sm": "380px",
+      "semi-sm": "460px",
+      // "semi-md": "460px",
       md: "768px",
       lg: "976px",
       xl: "1440px",
@@ -20,6 +22,7 @@ module.exports = {
       "5xl": "3.052rem",
     },
     colors: {
+      ...defaultTheme.colors,
       red: "#EF476F",
       "light-red": "#f87171",
       blue: "#457B9D",

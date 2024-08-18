@@ -30,6 +30,10 @@ class Register extends React.Component {
     });
   };
 
+  saveAuthTokenInSession = (token) => {
+    window.sessionStorage.setItem("token", token);
+  };
+
   handlerRegister = (e) => {
     e.preventDefault();
 
@@ -43,8 +47,8 @@ class Register extends React.Component {
 
     const form = e.target.closest("form");
     if (form.checkValidity()) {
+      // fetch("http://localhost:3000/register", {
       fetch("https://face-detection-backend-eef6.onrender.com/register", {
-        // fetch("http://localhost:3000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -65,10 +69,27 @@ class Register extends React.Component {
           }
           return response.json();
         })
-        .then((user) => {
-          if (user.id) {
-            this.props.onLoadUser(user);
-            this.props.onRouteChange("home");
+        .then((data) => {
+          if (data.userId && data.success === "true") {
+            this.saveAuthTokenInSession(data.token);
+            // fetch(`http://localhost:3000/profile/${data.userId}`, {
+            fetch(
+              `https://face-detection-backend-eef6.onrender.com/profile/${data.userId}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: data.token,
+                },
+              }
+            )
+              .then((res) => res.json())
+              .then((user) => {
+                if (user && user.email) {
+                  this.props.onLoadUser(user);
+                  this.props.onRouteChange("home");
+                }
+              });
           }
         })
         .catch((error) => {
