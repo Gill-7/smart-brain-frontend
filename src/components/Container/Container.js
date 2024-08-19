@@ -17,6 +17,7 @@ export default class Container extends Component {
       chooseFileRef,
       boxes,
       error,
+      errorSec,
     } = this.props;
     return (
       <div className="w-full text-white text-sm md:text-base sm:w-[400px] mx-4 py-10  px-2 md:px-3">
@@ -28,6 +29,11 @@ export default class Container extends Component {
           onChooseFileChange={onChooseFileChange}
           onSubmit={onSubmit}
         />
+        {errorSec && (
+          <div className="text-red text-left mt-4 text-xs md:text-sm">
+            Both URL and file inputs cannot be empty.
+          </div>
+        )}
         {error && (
           <div className="text-red text-left mt-4 text-xs md:text-sm">
             Both URL and file inputs cannot be used simultaneously.

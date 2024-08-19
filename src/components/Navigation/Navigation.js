@@ -23,7 +23,7 @@ const Navigation = ({
     );
   }
   return (
-    <nav className="flex justify-between items-center pr-2 sm:pr-4 md:pr-6 pl-2 sm:pl-4 md:pl-6 pt-2 pb-1 h-14 text-white">
+    <nav className="flex justify-between items-center pr-3 sm:pr-4 md:pr-6 pl-2 sm:pl-4 md:pl-6 pt-2 pb-1 h-14 text-white">
       <Logo />
       {changeNavigation}
     </nav>

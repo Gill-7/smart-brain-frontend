@@ -10,6 +10,7 @@ import Container from "./components/Container/Container";
 
 const initialState = {
   error: false,
+  errSec: false,
   inputUrl: "",
   imageUrl: "",
   inputSrc: "",
@@ -198,14 +199,20 @@ class App extends Component {
   handleError = () => {
     const { inputUrl, inputSrc } = this.state;
 
-    if (inputUrl && inputSrc) {
-      this.setState({ error: true }, () => {
-        this.checkForError(); // Check for the error after state has been set
-      });
-    } else {
-      this.setState({ error: false }, () => {
-        this.checkForError(); // Check for the error after state has been set
-      });
+    if (!inputUrl && !inputSrc) {
+      this.setState({ errorSec: true });
+    }
+
+    if (inputUrl || inputSrc) {
+      if (inputUrl && inputSrc) {
+        this.setState({ error: true }, () => {
+          this.checkForError(); // Check for the error after state has been set
+        });
+      } else {
+        this.setState({ error: false }, () => {
+          this.checkForError(); // Check for the error after state has been set
+        });
+      }
     }
   };
 
@@ -263,6 +270,7 @@ class App extends Component {
       route,
       boxes,
       error,
+      errorSec,
       isProfileOpen,
       isDropdownOpen,
       user,
@@ -304,7 +312,7 @@ class App extends Component {
           className={`${
             route === "signin" || route === "register"
               ? "h-3/4 md:h-screen rounded-t-[2rem] md:rounded-none absolute md:static bottom-0 left-0 bg-light md:bg-none right-0 border-light-blue flex items-center justify-center"
-              : "h-[calc(100vh-56px)] flex items-start md:items-center justify-center mt-28 md:mt-0"
+              : "md:h-[calc(100vh-56px)] flex items-start md:items-center justify-center mt-28 md:mt-0"
           }`}
         >
           {/* {window.innerWidth < 768 && (
@@ -325,6 +333,7 @@ class App extends Component {
               chooseFileRef={this.chooseFileRef}
               boxes={boxes}
               error={error}
+              errorSec={errorSec}
             />
           ) : route === "signin" ? (
             <Signin

@@ -28,7 +28,7 @@ export default class ProfileIcon extends React.Component {
       <div className="relative inline-block text-left">
         <button
           onClick={toggleProfileDropdown}
-          className={`mt-6 md:mt-5 inline-flex w-full justify-center text-xl outline-none shadow-sm cursor-pointer rounded-full hover:ring-2 hover:ring-gray active:ring-2 active:ring-gray focus:outline-none ${
+          className={`mt-6 md:mt-5 inline-flex w-full justify-center text-xl text-white outline-none shadow-sm cursor-pointer rounded-full hover:ring-2 hover:ring-gray active:ring-2 active:ring-gray focus:outline-none ${
             isDropdownOpen ? "ring-2 ring-white" : ""
           }`}
         >
