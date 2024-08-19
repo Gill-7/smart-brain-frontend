@@ -60,7 +60,6 @@ const ImageLinkForm = ({
         >
           Detect
         </button>
-        {/* {error && <p className="text-red mt-2">Please choose one option.</p>} */}
       </div>
     </div>
   );

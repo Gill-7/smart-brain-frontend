@@ -119,7 +119,6 @@ class Register extends React.Component {
                 id="name"
                 name="name"
                 type="text"
-                autoComplete="name"
                 required
                 className="relative block w-full my-6 py-1 md:px-3 md:py-2.5 border-b md:border-none border-light-gray placeholder-gray md:placeholder-black text-black
                   focus:outline-none md:rounded-md
@@ -131,7 +130,6 @@ class Register extends React.Component {
                 id="email-address"
                 name="email"
                 type="email"
-                autoComplete="email"
                 required
                 className="relative block w-full my-6 py-1 md:px-3 md:py-2.5 border-b md:border-none border-light-gray placeholder-gray md:placeholder-black text-black
                   focus:outline-none md:rounded-md
@@ -144,7 +142,6 @@ class Register extends React.Component {
                 name="password"
                 type="password"
                 minLength={6}
-                autoComplete="current-password"
                 required
                 className="relative block w-full my-6 py-1 md:px-3 md:py-2.5 border-b md:border-none border-light-gray placeholder-gray md:placeholder-black text-black
                   focus:outline-none md:rounded-md
