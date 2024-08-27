@@ -7,6 +7,8 @@ import Register from "./components/Register/Register";
 import Modal from "./components/Modal/Modal";
 import Profile from "./components/Profile/Profile";
 import Container from "./components/Container/Container";
+import imageCompression from 'browser-image-compression';
+
 
 const initialState = {
   error: false,
@@ -106,15 +108,26 @@ class App extends Component {
     });
   };
 
-  onChooseFileChange = (event) => {
+  onChooseFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64Image = reader.result.split(",")[1];
-        this.setState({ inputSrc: e.target.result, baseImage: base64Image });
+      const options = {
+        maxSizeMB: 3,
+        maxWidthOrHeight: 800,
+        useWebWorker: true,
       };
-      reader.readAsDataURL(file); // Read the file as a data URL
+      try {
+        const compressedFile = await imageCompression(file, options);
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          const base64Image = reader.result.split(",")[1];
+          this.setState({ inputSrc: e.target.result, baseImage: base64Image });
+        };
+        reader.readAsDataURL(compressedFile); // Read the file as a data URL
+      } catch(err) {
+        console.log('Error compressing the image:', err);
+      }
     }
   };
 
