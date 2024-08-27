@@ -41,7 +41,7 @@ class App extends Component {
   componentDidMount() {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch(`https://smart-brain-server.vercel.app/signin`, {
+      fetch(`http://localhost:3000/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ class App extends Component {
         .then((res) => res.json())
         .then((data) => {
           if (data && data.id) {
-            fetch(`https://smart-brain-server.vercel.app/profile/${data.id}`, {
+            fetch(`http://localhost:3000/profile/${data.id}`, {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
@@ -131,7 +131,7 @@ class App extends Component {
     });
 
     if (this.state.user.id) {
-      fetch("https://smart-brain-server.vercel.app/imageurl", {
+      fetch("http://localhost:3000/imageurl", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -147,7 +147,7 @@ class App extends Component {
         })
         .then((data) => {
           if (data) {
-            fetch("https://smart-brain-server.vercel.app/image", {
+            fetch("http://localhost:3000/image", {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",

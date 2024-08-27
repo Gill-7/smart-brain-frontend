@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 
 export default class ProfileIcon extends React.Component {
   handleSignOut = () => {
-    fetch("https://face-detection-backend-eef6.onrender.com/signout", {
+    fetch("http://localhost:3000/signout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
