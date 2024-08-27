@@ -41,7 +41,7 @@ class App extends Component {
   componentDidMount() {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch(`https://face-detection-backend-eef6.onrender.com/signin`, {
+      fetch(`https://smart-brain-server.vercel.app/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,16 +51,13 @@ class App extends Component {
         .then((res) => res.json())
         .then((data) => {
           if (data && data.id) {
-            fetch(
-              `https://face-detection-backend-eef6.onrender.com/profile/${data.id}`,
-              {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: token,
-                },
-              }
-            )
+            fetch(`https://smart-brain-server.vercel.app/profile/${data.id}`, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+              },
+            })
               .then((res) => res.json())
               .then((user) => {
                 if (user && user.email) {
@@ -134,7 +131,7 @@ class App extends Component {
     });
 
     if (this.state.user.id) {
-      fetch("https://face-detection-backend-eef6.onrender.com/imageurl", {
+      fetch("https://smart-brain-server.vercel.app/imageurl", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -150,7 +147,7 @@ class App extends Component {
         })
         .then((data) => {
           if (data) {
-            fetch("https://face-detection-backend-eef6.onrender.com/image", {
+            fetch("https://smart-brain-server.vercel.app/image", {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
