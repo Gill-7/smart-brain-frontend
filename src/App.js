@@ -113,7 +113,7 @@ class App extends Component {
     if (file) {
       const options = {
         maxSizeMB: 3,
-        maxWidthOrHeight: 800,
+        maxWidthOrHeight: 600,
         useWebWorker: true,
       };
       try {
