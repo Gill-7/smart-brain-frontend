@@ -26,7 +26,7 @@ class Profile extends React.Component {
     // fetch(`http://localhost:3000/profile/${this.props.user.id}`, {
     if (data.name || data.date_of_birth) {
       fetch(
-        `http://localhost:3000/profile/${this.props.user.id}`,
+        `https://smart-brain-backend-five.vercel.app/profile/${this.props.user.id}`,
         {
           method: "POST",
           headers: {

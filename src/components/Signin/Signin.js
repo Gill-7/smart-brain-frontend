@@ -32,7 +32,7 @@ class Signin extends React.Component {
     const form = e.target.closest("form");
     if (form.checkValidity()) {
       // fetch("http://localhost:3000/signin", {
-      fetch("http://localhost:3000/signin", {
+      fetch("https://smart-brain-backend-five.vercel.app/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,7 +46,7 @@ class Signin extends React.Component {
             this.saveAuthTokenInSession(data.token);
 
             fetch(
-              `http://localhost:3000/${data.userId}`,
+              `https://smart-brain-backend-five.vercel.app/${data.userId}`,
               {
                 method: "GET",
                 headers: {

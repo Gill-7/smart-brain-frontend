@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 
 export default class ProfileIcon extends React.Component {
   handleSignOut = () => {
-    fetch("http://localhost:3000/signout", {
+    fetch("https://smart-brain-backend-five.vercel.app/signout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

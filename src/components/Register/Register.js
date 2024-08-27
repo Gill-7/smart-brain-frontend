@@ -48,7 +48,7 @@ class Register extends React.Component {
     const form = e.target.closest("form");
     if (form.checkValidity()) {
       // fetch("http://localhost:3000/register", {
-      fetch("http://localhost:3000/register", {
+      fetch("https://smart-brain-backend-five.vercel.app/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -74,7 +74,7 @@ class Register extends React.Component {
             this.saveAuthTokenInSession(data.token);
             // fetch(`http://localhost:3000/profile/${data.userId}`, {
             fetch(
-              `http://localhost:3000/profile/${data.userId}`,
+              `https://smart-brain-backend-five.vercel.app/profile/${data.userId}`,
               {
                 method: "GET",
                 headers: {
