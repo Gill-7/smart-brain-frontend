@@ -46,7 +46,7 @@ class Signin extends React.Component {
             this.saveAuthTokenInSession(data.token);
 
             fetch(
-              `https://smart-brain-backend-five.vercel.app/${data.userId}`,
+              `https://smart-brain-backend-five.vercel.app/profile/${data.userId}`,
               {
                 method: "GET",
                 headers: {
