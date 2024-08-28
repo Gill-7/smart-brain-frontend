@@ -113,7 +113,7 @@ class App extends Component {
     if (file) {
       const options = {
         maxSizeMB: 10,
-        maxWidthOrHeight: 500,
+        maxWidthOrHeight: 1000,
         useWebWorker: true,
       };
       try {
@@ -287,7 +287,7 @@ class App extends Component {
     } = this.state;
     return (
       <div
-        className={`font-mono w-full h-screen md:h-full relative md:static m-0 p-0 md:bg-dark ${
+        className={`font-mono w-full h-full relative md:static m-0 p-0 md:bg-dark ${
           (route !== "signin" || route !== "register") && "bg-dark"
         }`}
       >
