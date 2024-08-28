@@ -288,7 +288,7 @@ class App extends Component {
     return (
       <div
         className={`font-mono w-full h-full relative md:static m-0 p-0 md:bg-dark ${
-          (route !== "signin" || route !== "register") && "bg-dark"
+          (route !== "signin" || route !== "register") && "bg-dark h-screen"
         }`}
       >
         {/* {window.innerWidth > 768 && (
