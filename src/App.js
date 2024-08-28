@@ -112,8 +112,8 @@ class App extends Component {
     const file = event.target.files[0];
     if (file) {
       const options = {
-        maxSizeMB: 3,
-        maxWidthOrHeight: 600,
+        maxSizeMB: 5,
+        maxWidthOrHeight: 500,
         useWebWorker: true,
       };
       try {
@@ -288,7 +288,7 @@ class App extends Component {
     return (
       <div
         className={`font-mono w-full h-screen md:h-full relative md:static m-0 p-0 md:bg-dark ${
-          (route !== "signin" || route !== "register") && "bg-dark"
+          (route !== "signin" || route !== "register") && "bg-dark bg-fixed"
         }`}
       >
         {/* {window.innerWidth > 768 && (
