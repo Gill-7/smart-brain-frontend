@@ -4,7 +4,7 @@ import "./FaceRecognition.css";
 const FaceRecognition = ({ image, boxes }) => {
   return (
     <div className="mt-4 w-full relative">
-      <img id="inputImage" src={image} alt="not provided" className="w-full" />
+      <img id="inputImage" src={image} alt="not provided" className="w-full max-h-[600px]" />
       {boxes.map((box) => (
         <div
           key={`box${box.topRow}${box.rightCol}`}
